@@ -21,7 +21,7 @@ export const createInvoiceFromOrder = async (req, res) => {
     const order = await Order.findOne({
       _id: req.body.orderId,
       owner: req.user.uid,
-      status: 'approved',
+      status: 'paid',
     }).populate('items.product');
 
     if (!order) {

@@ -11,7 +11,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        structuredClone: 'readonly',  // Define structuredClone as a global
+        structuredClone: 'readonly',  // Explicitly define structuredClone as a global
       },
       parser: parserTypescript,  // Set the parser to @typescript-eslint/parser for TypeScript support
       parserOptions: {
@@ -25,17 +25,17 @@ export default [
       '@typescript-eslint': tseslint,
     },
     rules: {
-      // Add or modify custom rules here
-      
-      // React rules
-      'react/prop-types': 'off', // Disable prop-types rule if you're using TypeScript
+      // Custom rules can be added here
+
+      // Example: React rules
+      'react/prop-types': 'off',  // Disable prop-types rule if you're using TypeScript
       'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.tsx'] }],
 
-      // TypeScript rules
+      // Example: TypeScript rules
       '@typescript-eslint/no-unused-vars': 'warn',  // Warn on unused variables
       '@typescript-eslint/explicit-module-boundary-types': 'off',  // Disable requiring explicit return types
 
-      // JavaScript rules
+      // Example: JavaScript rules
       'no-console': 'warn', // Warn on console statements
       'no-unused-vars': 'warn', // Warn on unused variables
     },

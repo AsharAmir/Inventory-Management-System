@@ -29,7 +29,12 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],  // Ensure all your source files are included
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",  // Include all files in the `src` folder
+    "vite.config.ts"  // Add vite.config.ts explicitly
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
 

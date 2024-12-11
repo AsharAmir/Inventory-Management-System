@@ -27,8 +27,8 @@ export default [
     rules: {
       // Custom rules can be added here
 
-      // Example: React rules
-      'react/prop-types': 'off',  // Disable prop-types rule if you're using TypeScript
+      // Example: Disable prop-types rule if you're using TypeScript
+      'react/prop-types': 'off',  // Disable prop-types rule for TypeScript users
       'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.tsx'] }],
 
       // Example: TypeScript rules

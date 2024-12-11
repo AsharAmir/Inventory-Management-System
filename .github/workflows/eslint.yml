@@ -28,7 +28,7 @@ jobs:
         run: npx eslint . --output-file eslint-report.json --format json # Run ESLint and save output to JSON file
 
       - name: Upload ESLint results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3 # Update to the latest version
         with:
           name: eslint-report
           path: eslint-report.json # Upload ESLint report as artifact

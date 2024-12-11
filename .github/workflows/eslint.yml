@@ -1,0 +1,34 @@
+name: ESLint
+
+on:
+  push:
+    branches:
+      - feat/manager-panel # Trigger on push to feat/manager-panel branch
+  pull_request:
+    branches:
+      - feat/manager-panel # Trigger on pull request to feat/manager-panel branch
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16" # Set Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint . --output-file eslint-report.json --format json # Run ESLint and save output to JSON file
+
+      - name: Upload ESLint results
+        uses: actions/upload-artifact@v2
+        with:
+          name: eslint-report
+          path: eslint-report.json # Upload ESLint report as artifact

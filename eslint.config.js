@@ -2,6 +2,7 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import pluginReact from 'eslint-plugin-react';
+import parserTypescript from '@typescript-eslint/parser';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -10,12 +11,13 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        structuredClone: 'readonly',  // Make structuredClone available globally
+        structuredClone: 'readonly',  // Define structuredClone as a global
       },
-      parser: '@typescript-eslint/parser',  // Enable TypeScript support
+      parser: parserTypescript,  // Set the parser to @typescript-eslint/parser for TypeScript support
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+        ecmaVersion: 'latest', // Use the latest ECMAScript version
+        sourceType: 'module',  // Enable module syntax
+        project: './tsconfig.json',  // Point to your TypeScript configuration file (if needed)
       },
     },
     plugins: {
@@ -23,11 +25,19 @@ export default [
       '@typescript-eslint': tseslint,
     },
     rules: {
-      // Add any custom rules if needed
+      // Add or modify custom rules here
+      
+      // React rules
+      'react/prop-types': 'off', // Disable prop-types rule if you're using TypeScript
+      'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.tsx'] }],
+
+      // TypeScript rules
+      '@typescript-eslint/no-unused-vars': 'warn',  // Warn on unused variables
+      '@typescript-eslint/explicit-module-boundary-types': 'off',  // Disable requiring explicit return types
+
+      // JavaScript rules
+      'no-console': 'warn', // Warn on console statements
+      'no-unused-vars': 'warn', // Warn on unused variables
     },
-    // Directly include the configurations rather than using `extends`
-    ...pluginJs.configs.recommended,  // JavaScript recommended rules
-    ...tseslint.configs.recommended, // TypeScript recommended rules
-    ...pluginReact.configs.flat.recommended, // React recommended rules
   },
 ];

@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        run: npx eslint . --output-file eslint-report.json --format json # Run ESLint and save output to JSON file
+        run: npx eslint . --output-file eslint-report.json --format json --max-warnings 0
 
       - name: Upload ESLint results
         uses: actions/upload-artifact@v3 # Update to the latest version

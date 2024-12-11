@@ -19,16 +19,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "20" # Set Node.js version
+          node-version: "20" # Match Node version with local setup
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        run: npx eslint . --output-file eslint-report.json --format json --max-warnings 0
+      - name: Verify ESLint installation
+        run: npx eslint --version # Ensure ESLint is installed
+
+      - name: List installed packages
+        run: npm ls --depth=0 # Ensure all dependencies are installed
+
+      - name: Run ESLint with debugging
+        run: npx eslint . --output-file eslint-report.json --format json --max-warnings 0 --debug
 
       - name: Upload ESLint results
-        uses: actions/upload-artifact@v3 # Update to the latest version
+        uses: actions/upload-artifact@v3
         with:
           name: eslint-report
-          path: eslint-report.json # Upload ESLint report as artifact
+          path: eslint-report.json

@@ -1,3 +1,13 @@
+name: ESLint
+
+on:
+  push:
+    branches:
+      - feat/manager-panel # Trigger on push to feat/manager-panel branch
+  pull_request:
+    branches:
+      - feat/manager-panel # Trigger on pull request to feat/manager-panel branch
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -9,21 +19,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "20" # Match Node version with local setup
+          node-version: "20" # Set Node.js version
 
       - name: Install dependencies
         run: npm install
 
-      - name: Print Node.js version
-        run: node -v # Display Node version to verify setup
-
       - name: Run ESLint
-        run: |
-          echo "Running ESLint..."
-          npx eslint . --output-file eslint-report.json --format json --max-warnings 0 || true  # Allow process to continue even with lint errors
+        run: npx eslint . --output-file eslint-report.json --format json --max-warnings 0
 
       - name: Upload ESLint results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3 # Update to the latest version
         with:
           name: eslint-report
-          path: eslint-report.json
+          path: eslint-report.json # Upload ESLint report as artifact
